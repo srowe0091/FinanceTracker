@@ -1,11 +1,12 @@
-import { ActionCard } from './Card'
 import { LinkBox } from './Link'
 
-export const ListItem = ({ children, ...rest }) => {
+import { cn } from 'ui/utils'
+
+export const ListItem = ({ children, className, ...rest }) => {
   return (
-    <ActionCard className="center-row justify-between mb-4" {...rest}>
+    <div className={cn('center-row justify-between p-3', className)} {...rest}>
       {children}
-    </ActionCard>
+    </div>
   )
 }
 

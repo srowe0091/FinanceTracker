@@ -2,12 +2,15 @@ import { useCallback } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { useBoolean } from 'react-use'
 
-import { Button, Fab, Input, Modal, ModalContent, ModalFooter } from '@/ui'
 import { AddIcon } from '@/icons'
+import { Button, Fab, Input, Modal, ModalContent, ModalFooter } from '@/ui'
+
+import { useNewTransaction } from '@/data/client'
 
 import { NewTransactionSchema } from './util'
 
 const CreateNew = ({ onClose }) => {
+  const { mutateAsync } = useNewTransaction()
   const {
     control,
     handleSubmit,
@@ -21,16 +24,15 @@ const CreateNew = ({ onClose }) => {
   })
 
   const onSubmit = useCallback(
-    async values => {
+    async ({ amount, ...rest }) => {
       try {
-        console.log(values)
-        // const data = await mutateAsync(values)
-      } catch (err) {
+        await mutateAsync({ ...rest, amount: amount * 100 })
         onClose()
+      } catch (err) {
         console.error(err)
       }
     },
-    [onClose]
+    [onClose, mutateAsync]
   )
 
   return (
@@ -39,7 +41,9 @@ const CreateNew = ({ onClose }) => {
         <Controller
           name="amount"
           control={control}
-          render={({ field, fieldState }) => <Input autoFocus label="Amount" error={fieldState.error} {...field} />}
+          render={({ field, fieldState }) => (
+            <Input autoFocus type="number" label="Amount" error={fieldState.error} {...field} />
+          )}
         />
 
         <Controller
