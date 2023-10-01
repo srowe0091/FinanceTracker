@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@/ui": ["./ui"],
+      "@/routes": ["./routes"],
+      "@/libs": ["./client/libs"],
+      "@/store/*": ["./client/store/*"],
+      "@/hooks": ["./client/hooks"],
+      "@/modules/*": ["./client/modules/*"],
+      "@/icons": ["./client/icons"],
+      "@/components": ["./client/components"],
+      "@/media/*": ["./client/media/*"],
+      "@/utils": ["./utils"],
+      "@/data/client": ["./data/client"],
+      "@/data/server": ["./data/server"],
+      "@/server/libs": ["./server/libs"]
+    }
+  }
+}

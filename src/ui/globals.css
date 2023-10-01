@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 255, 255, 255;
+    --foreground: 2, 8, 23;
+    --card: 255, 255, 255;
+    --card-foreground: 2, 8, 23;
+    --popover: 255, 255, 255;
+    --popover-foreground: 2, 8, 23;
+    --primary: 37, 99, 235;
+    --primary-foreground: 248, 250, 252;
+    --secondary: 241, 245, 249;
+    --secondary-foreground: 15, 23, 42;
+    --muted: 241, 245, 249;
+    --muted-foreground: 100, 116, 139;
+    --accent: 241, 245, 249;
+    --accent-foreground: 15, 23, 42;
+    --destructive: 239, 68, 68;
+    --destructive-foreground: 248, 250, 252;
+    --border: 226, 232, 240;
+    --input: 226, 232, 240;
+    --ring: 37, 99, 235;
+
+    --radius: 0.7rem;
+
+    --sizeHeader: 56px;
+    --sizeSideDrawer: 240px;
+    --sizeDrawerSize: 400px;
+    --transition: 125ms ease-in;
+  }
+
+  .dark {
+    /* --main-background: radial-gradient(circle at 100% 110%, rgb(103 24 67 / 65%) -20%, rgb(0 0 0) 80%, rgb(17 55 123 / 65%) 100%); */
+    /* --main-background: radial-gradient(circle at 100% 110%,  rgb(185 54 126 / 60%) 0%, rgb(41 121 161 / 60%) 100%); */
+    --main-background: radial-gradient(circle at 100% 180%, rgb(127 43 147) 0%, rgb(9 0 30) 100%);
+    --background: 2, 8, 23;
+    --foreground: 248, 250, 252;
+    --card: 207, 169, 200, 0.1;
+    --card-foreground: 248, 250, 252;
+    --popover: 2, 8, 23;
+    --popover-foreground: 248, 250, 252;
+    /* --primary: 86, 52, 187; */
+    --primary: 195, 48, 128;
+    --primary-foreground: 248, 250, 252;
+    --secondary: 67, 71, 112;
+    --secondary-foreground: 248, 250, 252;
+    --muted: 30, 41, 59;
+    --muted-foreground: 148, 163, 184;
+    --accent: 51, 56, 83;
+    --accent-foreground: 248, 250, 252;
+    --destructive: 127, 29, 29;
+    --destructive-foreground: 248, 250, 252;
+    --border: 67, 71, 112;
+    --input: 195, 48, 128;
+    --ring: 195, 48, 128;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border: 2px solid transparent;
+    background-clip: padding-box;
+
+    @apply rounded-lg bg-gray-500;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    border: 0;
+  }
+
+  ::-webkit-scrollbar-track:hover {
+    @apply bg-gray-700;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  .center {
+    @apply flex flex-col justify-center items-center;
+  }
+
+  .center-row {
+    @apply flex flex-row justify-center items-center;
+  }
+}
+
+@layer utilities {
+  .error {
+    @apply text-red-400;
+  }
+  .success {
+    @apply text-green-400;
+  }
+}
+
+@layer components {
+  *:focus-visible {
+    outline: none;
+  }
+
+  .hover-outline {
+    border: 2px solid;
+    border-color: transparent;
+    transition: border var(--transition);
+  }
+
+  .hover-outline:hover {
+    border-color: rgba(var(--primary));
+  }
+
+  .link-box {
+    position: relative;
+  }
+
+  .link-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
