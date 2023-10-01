@@ -1,8 +1,9 @@
 'use client'
 
-import { Fab, Fade } from '@/ui'
-import { AddIcon } from '@/icons'
+import { Fade } from '@/ui'
 import { Card } from '@/components'
+
+import { NewTransactionModal } from '@/modules/transactions'
 
 export const Dashboard = () => {
   return (
@@ -34,8 +35,7 @@ export const Dashboard = () => {
         </div>
       </div>
 
-      
-      <Fab icon={AddIcon} />
+      <NewTransactionModal />
     </Fade>
   )
 }

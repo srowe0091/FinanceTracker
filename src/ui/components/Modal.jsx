@@ -1,23 +1,10 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from './ui/dialog'
-import { useUnmount } from 'react-use'
-
-import { useModalStore } from '@/store/ModalStore'
 
 import { cn } from 'ui/utils'
 
-export const Modal = ({ children, header, name, trigger, triggerRef, ...rest }) => {
-  const { activeModal, toggle, closeModal } = useModalStore(state => ({
-    activeModal: state.activeModal,
-    toggle: state.toggleModal,
-    closeModal: state.closeModal
-  }))
-
-  const props = { ...(name && { open: activeModal === name, onOpenChange: toggle(name) }), ...rest }
-
-  useUnmount(() => closeModal())
-
+export const Modal = ({ children, header, trigger, triggerRef, ...rest }) => {
   return (
-    <Dialog {...props}>
+    <Dialog {...rest}>
       <DialogTrigger ref={triggerRef} asChild>
         {trigger}
       </DialogTrigger>
