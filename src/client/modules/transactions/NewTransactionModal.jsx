@@ -3,7 +3,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { useBoolean } from 'react-use'
 
 import { AddIcon } from '@/icons'
-import { Button, Fab, Input, Modal, ModalContent, ModalFooter } from '@/ui'
+import { Button, Checkbox, Fab, Input, Modal, ModalContent, ModalFooter } from '@/ui'
 
 import { useNewTransaction } from '@/data/client'
 
@@ -19,7 +19,8 @@ const CreateNew = ({ onClose }) => {
     resolver: NewTransactionSchema,
     defaultValues: {
       amount: '',
-      memo: ''
+      memo: '',
+      group: false
     }
   })
 
@@ -37,7 +38,7 @@ const CreateNew = ({ onClose }) => {
 
   return (
     <>
-      <ModalContent>
+      <ModalContent className="items-center">
         <Controller
           name="amount"
           control={control}
@@ -51,6 +52,14 @@ const CreateNew = ({ onClose }) => {
           control={control}
           render={({ field, fieldState }) => <Input label="Memo" error={fieldState.error} {...field} />}
         />
+
+        <div className="mt-4">
+          <Controller
+            name="group"
+            control={control}
+            render={({ field }) => <Checkbox {...field}>Group Purchase</Checkbox>}
+          />
+        </div>
       </ModalContent>
 
       <ModalFooter>

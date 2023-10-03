@@ -38,6 +38,7 @@
     --main-background: radial-gradient(circle at 100% 180%, rgb(127 43 147) 0%, rgb(9 0 30) 100%);
     --background: 2, 8, 23;
     --foreground: 248, 250, 252;
+    --card-gradient: linear-gradient(0deg, rgb(0 0 0 / 5%) 0%, rgb(255 255 255 / 5%) 100%);
     --card: 207, 169, 200, 0.1;
     --card-foreground: 248, 250, 252;
     --popover: 2, 8, 23;
@@ -53,7 +54,7 @@
     --accent-foreground: 248, 250, 252;
     --destructive: 127, 29, 29;
     --destructive-foreground: 248, 250, 252;
-    --border: 150, 57, 173;
+    --border: 195, 48, 128, 0.6;
     --input: 195, 48, 128;
     --ring: 195, 48, 128;
   }
@@ -102,6 +103,10 @@
   }
   .success {
     @apply text-green-400;
+  }
+
+  .h-screen {
+    height: 100dvh;
   }
 }
 

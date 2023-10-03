@@ -6,7 +6,7 @@ import { Label } from './label'
 
 import { cn } from 'ui/utils'
 
-const Checkbox = React.forwardRef(({ className, children, ...props }, ref) => {
+const Checkbox = React.forwardRef(({ className, children, value, onChange, ...props }, ref) => {
   const htmlFor = React.useId()
   return (
     <Label htmlFor={htmlFor} className="peer center-row gap-2 cursor-pointer">
@@ -17,6 +17,8 @@ const Checkbox = React.forwardRef(({ className, children, ...props }, ref) => {
           'peer h-5 w-5 shrink-0 rounded border border-primary disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground',
           className
         )}
+        checked={value}
+        onCheckedChange={onChange}
         {...props}
       >
         <CheckboxPrimitive.Indicator className="flex items-center justify-center text-current">

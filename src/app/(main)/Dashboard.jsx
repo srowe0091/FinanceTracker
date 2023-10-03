@@ -1,10 +1,10 @@
 'use client'
 
 import { useMemo } from 'react'
-import { sumBy } from 'lodash/fp'
+import { update, add } from 'lodash/fp'
 import { isBefore, addWeeks, differenceInCalendarDays } from 'date-fns'
 
-import { Fade, ContainerLoader, Skeleton } from '@/ui'
+import { Fade, ContainerLoader, Skeleton, Divider, Badge } from '@/ui'
 import { Card, ListItem } from '@/components'
 
 import { useGetTransactions } from '@/data/client'
@@ -26,17 +26,26 @@ const nextPayDate = payInterval => {
 export const Dashboard = () => {
   const { data, isLoading } = useGetTransactions()
 
-  const spent = useMemo(() => {
+  const { spent, groupedSpent } = useMemo(() => {
     const ALLOWANCE = 30000
-    const spent = sumBy('amount', data)
-    return formatCurrency(ALLOWANCE - spent)
+    const totalSpent = data?.reduce(
+      (acc, curr) => update(curr.group ? 'groupedSpent' : 'spent', add(curr.amount), acc),
+      { groupedSpent: 0, spent: 0 }
+    )
+
+    if (!totalSpent) return {}
+
+    return {
+      spent: formatCurrency(ALLOWANCE - totalSpent.spent),
+      groupedSpent: formatCurrency(totalSpent.groupedSpent)
+    }
   }, [data])
 
   const nextDate = useMemo(() => nextPayDate(KNOWN_PAY_DATE), [])
 
   return (
     <Fade in>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         <Card className="text-center flex flex-col gap-4">
           {isLoading ? (
             <div className="center w-full h-[72px]">
@@ -51,7 +60,7 @@ export const Dashboard = () => {
           )}
         </Card>
 
-        <div className="flex gap-2">
+        <div className="flex gap-3">
           <Card className="flex-1 text-center flex flex-col gap-4">
             <p>
               <span className="text-3xl font-bold">{nextDate}</span>
@@ -60,30 +69,42 @@ export const Dashboard = () => {
             </p>
           </Card>
           <Card className="flex-1 text-center flex flex-col gap-4">
-            <p>
-              <span className="text-3xl font-bold">$123.03</span>
-              <br />
-              Group spent
-            </p>
+            {isLoading ? (
+              <div className="center w-full h-[60px]">
+                <Skeleton className="w-full h-[30px]" />
+              </div>
+            ) : (
+              <p>
+                <span className="text-3xl font-bold">{groupedSpent}</span>
+                <br />
+                Group spent
+              </p>
+            )}
           </Card>
         </div>
       </div>
 
-      <div className="mt-2 pb-16 relative">
+      <Divider />
+
+      <div className="pb-16 relative">
         <ContainerLoader loading={isLoading} />
 
-        <div className="divide-y">
-          {data?.map(transaction => {
-            return (
-              <ListItem key={transaction.id} className="gap-2">
-                <p className="">{transaction.memo}</p>
-                <div className="text-right shrink-0">
+        <div className="flex flex-col gap-3">
+          {data?.map(transaction => (
+            <ListItem key={transaction.id} className="gap-2">
+              <div className="w-full flex justify-between">
+                <p className="">{transaction.memo || '--'}</p>
+                {transaction.group && <Badge className="self-center">Group</Badge>}
+              </div>
+
+              <div className="text-right shrink-0">
+                <span>
                   <p className="text-sm">{formatCurrency(transaction.amount)}</p>
                   <p className="text-xs">{formatDate(transaction.created_at, 'EEE MM/dd')}</p>
-                </div>
-              </ListItem>
-            )
-          })}
+                </span>
+              </div>
+            </ListItem>
+          ))}
         </div>
       </div>
 

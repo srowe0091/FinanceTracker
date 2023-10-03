@@ -26,7 +26,7 @@ export const Sidebar = ({ isOpen, closeDrawer }) => {
   return (
     <Collapsible open={isMobile ? isOpen : true}>
       <CollapsibleContent className="z-10">
-        <div className="h-header bg-mainBackground w-screen p-4 gap-8 flex flex-col md:w-full md:h-screen md:bg-black/20 md:shadow-sidebar">
+        <div className="h-header bg-mainBackground md:bg-none w-screen p-4 gap-8 flex flex-col md:w-full md:h-screen md:shadow-sidebar">
           <div className="center gap-1">
             {navLink.map(route => (
               <Fragment key={route.label}>

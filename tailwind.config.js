@@ -11,7 +11,7 @@ module.exports = {
         sans: ['Nunito Sans']
       },
       height: {
-        header: 'calc(100vh - var(--sizeHeader))'
+        header: 'calc(100dvh - var(--sizeHeader))'
       },
       ringColor: {
         DEFAULT: 'rgba(var(--ring))'
@@ -52,6 +52,7 @@ module.exports = {
       },
       backgroundImage: {
         mainBackground: 'var(--main-background)',
+        card: 'var(--card-gradient)',
         progressBar:
           'linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(var(--primary)) 25%, rgba(var(--primary)) 75%, rgba(0,0,0,0) 100%)'
       },

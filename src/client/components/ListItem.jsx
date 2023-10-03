@@ -1,12 +1,13 @@
+import { Card } from '.'
 import { LinkBox } from './Link'
 
 import { cn } from 'ui/utils'
 
 export const ListItem = ({ children, className, ...rest }) => {
   return (
-    <div className={cn('center-row justify-between p-3', className)} {...rest}>
+    <Card className={cn('center-row justify-between p-2 px-3 bg-card', className)} {...rest}>
       {children}
-    </div>
+    </Card>
   )
 }
 
