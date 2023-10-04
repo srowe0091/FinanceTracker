@@ -8,9 +8,6 @@ import { sbClient } from '@/libs'
 import { Card } from '@/components'
 import { LoginSchema } from '@/modules/authentication'
 
-import Wallpaper from '@/media/wallpaper.jpg'
-import LogoImage from '@/media/logo.png'
-
 export const LoginPage = () => {
   const [error, updateError] = useState(null)
 
@@ -40,13 +37,13 @@ export const LoginPage = () => {
   return (
     <div
       className="w-screen h-screen center justify-start md:justify-center bg-no-repeat bg-right bg-cover animate-loginBackground"
-      style={{ backgroundImage: `url('${Wallpaper.src}')` }}
+      style={{ backgroundImage: `url(/wallpaper.jpg)` }}
     >
       <form className="w-full max-w-[350px] mt-8 md:mt-0" onSubmit={handleSubmit(onSubmit)}>
         <Card dark className="flex flex-col gap-4 w-full gap-4 max-w-[350px]">
           <div
             className="self-center h-24 w-32 bg-no-repeat bg-center bg-cover rounded-3xl"
-            style={{ backgroundImage: `url('${LogoImage.src}')` }}
+            style={{ backgroundImage: `url(/icon-512.png)` }}
           />
 
           <Controller

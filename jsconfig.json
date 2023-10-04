@@ -10,7 +10,6 @@
       "@/modules/*": ["./client/modules/*"],
       "@/icons": ["./client/icons"],
       "@/components": ["./client/components"],
-      "@/media/*": ["./client/media/*"],
       "@/utils": ["./utils"],
       "@/data/client": ["./data/client"],
       "@/data/server": ["./data/server"],

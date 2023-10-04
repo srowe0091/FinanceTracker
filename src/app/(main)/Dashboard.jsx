@@ -84,7 +84,7 @@ export const Dashboard = () => {
         </div>
       </div>
 
-      <Divider />
+      {!!data?.length && <Divider />}
 
       <div className="pb-16 relative">
         <ContainerLoader loading={isLoading} />
