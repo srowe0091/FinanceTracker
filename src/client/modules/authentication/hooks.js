@@ -13,7 +13,17 @@ export const useAuthorization = () => {
 
       if (error) throw error
 
-      return data?.session?.user ?? null
+      if (data?.session?.user) {
+        const user = await sbClient
+          .from('profiles')
+          .select('allowance, user_type')
+          .eq('owner', data?.session?.user.id)
+          .single()
+
+        return Object.assign(data.session.user, { profile: user.data })
+      }
+
+      return null
     }
   })
 

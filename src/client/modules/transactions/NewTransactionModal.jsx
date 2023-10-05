@@ -43,7 +43,7 @@ const CreateNew = ({ onClose }) => {
           name="amount"
           control={control}
           render={({ field, fieldState }) => (
-            <Input autoFocus type="number" inputmode="decimal" label="Amount" error={fieldState.error} {...field} />
+            <Input autoFocus type="number" inputMode="decimal" label="Amount" error={fieldState.error} {...field} />
           )}
         />
 

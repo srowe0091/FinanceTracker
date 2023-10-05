@@ -9,7 +9,7 @@ import { cn } from 'ui/utils'
 const Checkbox = React.forwardRef(({ className, children, value, onChange, ...props }, ref) => {
   const htmlFor = React.useId()
   return (
-    <Label htmlFor={htmlFor} className="peer center-row gap-2 cursor-pointer">
+    <Label htmlFor={htmlFor} className="peer flex items-center gap-2 cursor-pointer">
       <CheckboxPrimitive.Root
         id={htmlFor}
         ref={ref}

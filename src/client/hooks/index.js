@@ -1,5 +1,5 @@
-import { useQueryClient } from '@tanstack/react-query'
 import { useWindowSize } from 'react-use'
+import { useQueryClient } from '@tanstack/react-query'
 
 import { theme } from '@/ui'
 

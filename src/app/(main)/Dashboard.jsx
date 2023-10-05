@@ -4,12 +4,13 @@ import { useMemo } from 'react'
 import { update, add } from 'lodash/fp'
 import { isBefore, addWeeks, differenceInCalendarDays } from 'date-fns'
 
-import { Fade, ContainerLoader, Skeleton, Divider, Badge } from '@/ui'
-import { Card, ListItem } from '@/components'
+import { Fade, ContainerLoader, Skeleton, Divider } from '@/ui'
+import { Card, TransactionItem, TransactionList } from '@/components'
 
 import { useGetTransactions } from '@/data/client'
 import { NewTransactionModal } from '@/modules/transactions'
-import { formatCurrency, formatDate } from 'utils/normalizers'
+import { formatCurrency } from 'utils/normalizers'
+import { useUser } from '@/hooks'
 
 const KNOWN_PAY_DATE = new Date('9/29/2023')
 
@@ -24,10 +25,10 @@ const nextPayDate = payInterval => {
 }
 
 export const Dashboard = () => {
+  const user = useUser()
   const { data, isLoading } = useGetTransactions()
 
   const { spent, groupedSpent } = useMemo(() => {
-    const ALLOWANCE = 30000
     const totalSpent = data?.reduce(
       (acc, curr) => update(curr.group ? 'groupedSpent' : 'spent', add(curr.amount), acc),
       { groupedSpent: 0, spent: 0 }
@@ -36,10 +37,10 @@ export const Dashboard = () => {
     if (!totalSpent) return {}
 
     return {
-      spent: formatCurrency(ALLOWANCE - totalSpent.spent),
+      spent: formatCurrency(user.profile.allowance - totalSpent.spent),
       groupedSpent: formatCurrency(totalSpent.groupedSpent)
     }
-  }, [data])
+  }, [data, user.profile.allowance])
 
   const nextDate = useMemo(() => nextPayDate(KNOWN_PAY_DATE), [])
 
@@ -89,23 +90,11 @@ export const Dashboard = () => {
       <div className="pb-16 relative">
         <ContainerLoader loading={isLoading} />
 
-        <div className="flex flex-col gap-3">
+        <TransactionList>
           {data?.map(transaction => (
-            <ListItem key={transaction.id} className="gap-2">
-              <div className="w-full flex justify-between">
-                <p className="">{transaction.memo || '--'}</p>
-                {transaction.group && <Badge className="self-center">Group</Badge>}
-              </div>
-
-              <div className="text-right shrink-0">
-                <span>
-                  <p className="text-sm">{formatCurrency(transaction.amount)}</p>
-                  <p className="text-xs">{formatDate(transaction.created_at, 'EEE MM/dd')}</p>
-                </span>
-              </div>
-            </ListItem>
+            <TransactionItem key={transaction.id} transaction={transaction} />
           ))}
-        </div>
+        </TransactionList>
       </div>
 
       <NewTransactionModal />

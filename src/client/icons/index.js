@@ -23,6 +23,7 @@ import {
   FaImage,
   FaLock,
   FaMinus,
+  FaMoneyBill,
   FaPaintBrush,
   FaPen,
   FaPlus,
@@ -33,6 +34,7 @@ import {
   FaSignOutAlt,
   FaSlidersH,
   FaSpinner,
+  FaSyncAlt,
   FaTimes,
   FaTrashAlt,
   FaUpload,
@@ -69,12 +71,14 @@ export const LogoutIcon = FaSignOutAlt
 export const MailIcon = FaEnvelope
 export const MenuIcon = FaBars
 export const MinusIcon = FaMinus
+export const MoneyIcon = FaMoneyBill
 export const NotificationIcon = FaBell
 export const OptionsIcon = FaEllipsisH
 export const PasswordIcon = FaLock
 export const PendingIcon = FaHourglassHalf
 export const ProfileIcon = FaAddressCard
 export const QRCodeIcon = FaQrcode
+export const RefreshIcon = FaSyncAlt
 export const SearchIcon = FaSearch
 export const SettingsIcon = FaCog
 export const ShareIcon = FaShareAlt
