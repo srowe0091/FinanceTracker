@@ -25,9 +25,9 @@ const CreateNew = ({ onClose }) => {
   })
 
   const onSubmit = useCallback(
-    async ({ amount, ...rest }) => {
+    async values => {
       try {
-        await mutateAsync({ ...rest, amount: amount * 100 })
+        await mutateAsync(values)
         onClose()
       } catch (err) {
         console.error(err)
