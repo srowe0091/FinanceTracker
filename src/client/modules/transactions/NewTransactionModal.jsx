@@ -3,7 +3,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { useBoolean } from 'react-use'
 
 import { AddIcon } from '@/icons'
-import { Button, Checkbox, Fab, Input, Modal, ModalContent, ModalFooter } from '@/ui'
+import { Button, Checkbox, Fab, Input, Modal, ModalContent, ModalFooter, CurrencyInput } from '@/ui'
 
 import { useNewTransaction } from '@/data/client'
 
@@ -18,7 +18,7 @@ const CreateNew = ({ onClose }) => {
   } = useForm({
     resolver: NewTransactionSchema,
     defaultValues: {
-      amount: '',
+      amount: 0,
       memo: '',
       group: false
     }
@@ -43,7 +43,12 @@ const CreateNew = ({ onClose }) => {
           name="amount"
           control={control}
           render={({ field, fieldState }) => (
-            <Input autoFocus type="number" inputMode="decimal" label="Amount" error={fieldState.error} {...field} />
+            <CurrencyInput
+              autoFocus
+              className="mt-4 h-auto text-center text-6xl border-none focus-visible:ring-0 hover:ring-0"
+              error={fieldState.error}
+              {...field}
+            />
           )}
         />
 

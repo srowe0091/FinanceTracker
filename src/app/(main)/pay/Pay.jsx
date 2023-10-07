@@ -43,7 +43,7 @@ export const Pay = () => {
           <TransactionItem
             key={transaction.id}
             transaction={transaction}
-            className={cn({ 'ring-2': list.includes(transaction.id) })}
+            className={cn({ 'outline outline-primary outline-2': list.includes(transaction.id) })}
             onClick={handleClick(transaction.id)}
           />
         ))}

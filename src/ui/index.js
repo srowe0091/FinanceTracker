@@ -8,6 +8,7 @@ import tailwindConfig from '../../tailwind.config'
 
 export const { theme } = resolveConfig(tailwindConfig)
 
+export * from './components/CurrencyInput'
 export * from './components/Drawer'
 export * from './components/Modal'
 export * from './components/Menu'
@@ -18,6 +19,7 @@ export * from './components/Divider'
 // animations
 export * from './components/Fade'
 
+// UI components
 export * from './components/ui/accordion'
 export * from './components/ui/autocomplete'
 export * from './components/ui/badge'
