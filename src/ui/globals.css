@@ -33,8 +33,6 @@
   }
 
   .dark {
-    /* --main-background: radial-gradient(circle at 100% 110%, rgb(103 24 67 / 65%) -20%, rgb(0 0 0) 80%, rgb(17 55 123 / 65%) 100%); */
-    /* --main-background: radial-gradient(circle at 100% 110%,  rgb(185 54 126 / 60%) 0%, rgb(41 121 161 / 60%) 100%); */
     --main-background: radial-gradient(circle at 100% 180%, rgb(127 43 147) 0%, rgb(9 0 30) 100%);
     --background: 2, 8, 23;
     --foreground: 248, 250, 252;
@@ -43,7 +41,6 @@
     --card-foreground: 248, 250, 252;
     --popover: 2, 8, 23;
     --popover-foreground: 248, 250, 252;
-    /* --primary: 86, 52, 187; */
     --primary: 195, 48, 128;
     --primary-foreground: 248, 250, 252;
     --secondary: 67, 71, 112;
