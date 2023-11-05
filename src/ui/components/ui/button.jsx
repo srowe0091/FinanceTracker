@@ -52,14 +52,15 @@ const Button = forwardRef(({ children, className, variant, size, loading, label,
 })
 Button.displayName = 'Button'
 
-export const Fab = forwardRef(({ icon, variant, ...props }, ref) => {
+export const Fab = forwardRef(({ icon, variant, children, ...props }, ref) => {
   return (
     <button
       ref={ref}
-      className={cn('fixed bottom-8 right-6', buttonVariants({ variant, size: 'icon' }), 'rounded-full h-12 w-12 z-20')}
+      className={cn('fixed bottom-8 right-6 shadow-fab', buttonVariants({ variant, size: 'icon' }), 'rounded-full h-12 w-12 z-20')}
       {...props}
     >
-      {createElement(icon)}
+      {icon && createElement(icon)}
+      {children}
     </button>
   )
 })

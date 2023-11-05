@@ -8,9 +8,9 @@ export const Fade = ({ children, in: isVisible, ...rest }) => {
     config: (_, __, state) => {
       switch (state) {
         case 'enter':
-          return { duration: 200 }
+          return { duration: 150 }
         case 'leave':
-          return { duration: 3000 }
+          return { duration: 100 }
       }
     }
   })

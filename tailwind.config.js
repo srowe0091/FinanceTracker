@@ -63,7 +63,8 @@ module.exports = {
       },
       boxShadow: {
         sidebar: '-5px 0 15px 0px #000',
-        header: '0 -10px 15px 4px #000'
+        header: '0 -10px 15px 4px #000',
+        fab: '0 3px 20px -5px #000'
       },
       keyframes: {
         fadeIn: {

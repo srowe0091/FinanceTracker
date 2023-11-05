@@ -55,7 +55,7 @@ const DialogHeader = ({ className, ...props }) => (
 DialogHeader.displayName = 'DialogHeader'
 
 const DialogFooter = ({ className, ...props }) => (
-  <div className={cn('flex flex-col-reverse md:flex-row md:justify-end gap-4', className)} {...props} />
+  <div className={cn('mb-4 flex flex-col-reverse md:flex-row md:justify-end gap-4', className)} {...props} />
 )
 DialogFooter.displayName = 'DialogFooter'
 

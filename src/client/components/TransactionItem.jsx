@@ -5,8 +5,8 @@ import { ListItem } from './ListItem'
 import { formatCurrency, formatDate } from 'utils/normalizers'
 import { cn } from 'ui/utils'
 
-export const TransactionList = ({ children }) => {
-  return <div className="flex flex-col gap-3">{children}</div>
+export const TransactionList = ({ children, className }) => {
+  return <div className={cn('flex flex-col gap-3', className)}>{children}</div>
 }
 
 export const TransactionItem = ({ transaction, className, ...rest }) => {

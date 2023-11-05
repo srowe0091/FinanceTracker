@@ -29,7 +29,7 @@ export const useGetAllUnpaidTransactions = () => {
     queryFn: async () => {
       const { data, error } = await sbClient
         .from('transactions')
-        .select()
+        .select('*, ...profiles(name)')
         .eq('paid', false)
         .order('created_at', { ascending: false })
 
@@ -73,9 +73,3 @@ export const usePayTransactions = () => {
     }
   })
 }
-
-// be6883c0-c3e1-4fde-b96d-78f7e0064e7e - steven
-
-// c63c2e16-8388-4a82-af62-555d405d0e3d - jamie
-
-// dd3cdfe8-e231-4a9c-a3cc-f0c42ba67abd - test
