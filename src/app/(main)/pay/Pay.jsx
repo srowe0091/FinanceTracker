@@ -3,7 +3,7 @@
 import { useList } from 'react-use'
 import { groupBy } from 'lodash/fp'
 
-import { Checkbox, Fab, Fade } from '@/ui'
+import { Checkbox, ContainerLoader, Fab, Fade } from '@/ui'
 import { cn } from 'ui/utils'
 import { TransactionItem, TransactionList } from 'client/components/TransactionItem'
 import { useGetAllUnpaidTransactions, usePayTransactions } from 'data/client/transactions'
@@ -11,8 +11,10 @@ import { useCallback, useMemo } from 'react'
 
 export const Pay = () => {
   const { data } = useGetAllUnpaidTransactions()
-  const { mutateAsync } = usePayTransactions()
   const [list, { set, push, filter, clear }] = useList([])
+  const { mutateAsync, isPending } = usePayTransactions({
+    onSuccess: () => set([])
+  })
 
   const parsedData = useMemo(() => groupBy('name', data), [data])
 
@@ -42,6 +44,8 @@ export const Pay = () => {
 
   return (
     <Fade in>
+      <ContainerLoader loading={isPending} />
+
       <div className="flex justify-center mb-8">
         <Checkbox value={list?.length === data?.length} onChange={handleSelectAll}>
           Select All
@@ -71,8 +75,8 @@ export const Pay = () => {
 
       <div className="block mb-16" />
 
-      <Fade in={list.length > 0} onClick={() => mutateAsync(list)}>
-        <Fab>Pay</Fab>
+      <Fade in={list.length > 0}>
+        <Fab onClick={() => mutateAsync(list)}>Pay</Fab>
       </Fade>
     </Fade>
   )

@@ -57,7 +57,7 @@ export const useNewTransaction = () => {
   })
 }
 
-export const usePayTransactions = () => {
+export const usePayTransactions = props => {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -70,6 +70,7 @@ export const usePayTransactions = () => {
     },
     onSettled: async () => {
       await Promise.allSettled([queryClient.invalidateQueries({ queryKey: ['transactions'], refetchType: 'all' })])
-    }
+    },
+    ...props
   })
 }
