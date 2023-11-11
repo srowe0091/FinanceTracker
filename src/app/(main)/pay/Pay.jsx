@@ -46,10 +46,14 @@ export const Pay = () => {
     <Fade in>
       <ContainerLoader loading={isPending} />
 
+      {list?.length === 0 && <p className='mt-10 text-center text-xl font-bold opacity-70'>No Transactions</p>}
+
       <div className="flex justify-center mb-8">
-        <Checkbox value={list?.length === data?.length} onChange={handleSelectAll}>
-          Select All
-        </Checkbox>
+        {list?.length > 0 && (
+          <Checkbox value={list?.length === data?.length} onChange={handleSelectAll}>
+            Select All
+          </Checkbox>
+        )}
       </div>
 
       {Object.entries(parsedData)?.map(([user, transactions]) => (
