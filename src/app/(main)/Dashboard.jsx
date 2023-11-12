@@ -13,6 +13,7 @@ import { formatCurrency } from 'utils/normalizers'
 import { useUser } from '@/hooks'
 
 const KNOWN_PAY_DATE = new Date('9/29/2023')
+const GROUP_TOTAL = 47500
 
 const nextPayDate = payInterval => {
   const today = new Date()
@@ -38,7 +39,7 @@ export const Dashboard = () => {
 
     return {
       spent: formatCurrency(user.profile.allowance - totalSpent.spent),
-      groupedSpent: formatCurrency(totalSpent.groupedSpent)
+      groupedSpent: formatCurrency(GROUP_TOTAL - totalSpent.groupedSpent)
     }
   }, [data, user.profile.allowance])
 
@@ -78,7 +79,7 @@ export const Dashboard = () => {
               <p>
                 <span className="text-3xl font-bold">{groupedSpent}</span>
                 <br />
-                Group spent
+                Group Left
               </p>
             )}
           </Card>
