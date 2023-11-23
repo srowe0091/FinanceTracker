@@ -10,7 +10,7 @@ import { useGetAllUnpaidTransactions, usePayTransactions } from 'data/client/tra
 import { useCallback, useMemo } from 'react'
 
 export const Pay = () => {
-  const { data } = useGetAllUnpaidTransactions()
+  const { data, isLoading } = useGetAllUnpaidTransactions()
   const [list, { set, push, filter, clear }] = useList([])
   const { mutateAsync, isPending } = usePayTransactions({
     onSuccess: () => set([])
@@ -44,19 +44,19 @@ export const Pay = () => {
 
   return (
     <Fade in>
-      <ContainerLoader loading={isPending} />
+      <ContainerLoader loading={isPending || isLoading} />
 
-      {(!data || data.length === 0) && (
+      {(!data || data.length === 0) && !isLoading && (
         <p className="mt-10 text-center text-xl font-bold opacity-70">No Transactions</p>
       )}
 
-      <div className="flex justify-center mb-8">
-        {list?.length > 0 && (
+      {data?.length > 0 && (
+        <div className="flex justify-center mb-8">
           <Checkbox value={list?.length === data?.length} onChange={handleSelectAll}>
             Select All
           </Checkbox>
-        )}
-      </div>
+        </div>
+      )}
 
       {Object.entries(parsedData)?.map(([user, transactions]) => (
         <div key={user} className="flex flex-col gap-4">
