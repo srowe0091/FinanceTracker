@@ -46,7 +46,9 @@ export const Pay = () => {
     <Fade in>
       <ContainerLoader loading={isPending} />
 
-      {list?.length === 0 && <p className='mt-10 text-center text-xl font-bold opacity-70'>No Transactions</p>}
+      {(!data || data.length === 0) && (
+        <p className="mt-10 text-center text-xl font-bold opacity-70">No Transactions</p>
+      )}
 
       <div className="flex justify-center mb-8">
         {list?.length > 0 && (
