@@ -42,21 +42,26 @@ export const Pay = () => {
     [list, push, filter]
   )
 
+  // when fetching the transactions is in flight, show loading spinner
+  if (isLoading) {
+    return <ContainerLoader loading={isLoading} />
+  }
+
+  // when request completes and theres no transactions, show empty state
+  if (!isLoading && (!data || data.length === 0)) {
+    return <p className="mt-10 text-center text-xl font-bold opacity-70">No Transactions</p>
+  }
+
+  // else, show the transaction list
   return (
     <Fade in>
-      <ContainerLoader loading={isPending || isLoading} />
+      <ContainerLoader loading={isPending} />
 
-      {(!data || data.length === 0) && !isLoading && (
-        <p className="mt-10 text-center text-xl font-bold opacity-70">No Transactions</p>
-      )}
-
-      {data?.length > 0 && (
-        <div className="flex justify-center mb-8">
-          <Checkbox value={list?.length === data?.length} onChange={handleSelectAll}>
-            Select All
-          </Checkbox>
-        </div>
-      )}
+      <div className="flex justify-center mb-8">
+        <Checkbox value={list?.length === data?.length} onChange={handleSelectAll}>
+          Select All
+        </Checkbox>
+      </div>
 
       {Object.entries(parsedData)?.map(([user, transactions]) => (
         <div key={user} className="flex flex-col gap-4">
